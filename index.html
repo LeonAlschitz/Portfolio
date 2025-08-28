@@ -3,16 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leons page</title>
+    <title>Leons Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background: #1a1a1a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .nav-section {
+            padding: 20px 0;
+        }
+
+        .nav-section.top {
+            flex: 1;
+        }
+
+        .nav-section.bottom {
+            border-top: 1px solid #333;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .nav-item:hover {
+            background: #333;
+            color: white;
+        }
+
+        .nav-item.active {
+            background: #007acc;
+            color: white;
+        }
+
+        .nav-item .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            background: currentColor;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+
+        .nav-item .icon.dashboard { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 5a2 2 0 012-2h4a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V5z'/%3E%3C/svg%3E"); }
+        .nav-item .icon.network { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9'/%3E%3C/svg%3E"); }
+        .nav-item .icon.about { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'/%3E%3C/svg%3E"); }
+        .nav-item .icon.contact { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z'/%3E%3C/svg%3E"); }
+        .nav-item .icon.settings { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'/%3E%3C/svg%3E"); }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            background: white;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+            max-width: 800px;
+        }
+
+        /* Network Map Container */
+        .netmap-container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafbfc;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Leons page</h1>
-    <nav>
-        <ul>
-            <li><a href="page1.html">Page 1</a></li>
-            <li><a href="page2.html">Page 2</a></li>
-            <li><a href="page3.html">Page 3</a></li>
-        </ul>
-    </nav>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>Leon's Portfolio</h1>
+            </div>
+            
+            <nav class="nav-section top">
+                <button class="nav-item active" data-section="dashboard">
+                    <div class="icon dashboard"></div>
+                    Dashboard
+                </button>
+                <button class="nav-item" data-section="network">
+                    <div class="icon network"></div>
+                    Network Map
+                </button>
+                <button class="nav-item" data-section="about">
+                    <div class="icon about"></div>
+                    About
+                </button>
+                <button class="nav-item" data-section="contact">
+                    <div class="icon contact"></div>
+                    Contact
+                </button>
+            </nav>
+            
+            <nav class="nav-section bottom">
+                <button class="nav-item" data-section="settings">
+                    <div class="icon settings"></div>
+                    Settings
+                </button>
+            </nav>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="content-section active">
+                <h1 class="page-title">Welcome to My Portfolio</h1>
+                <p class="content-text">
+                    Hello! I'm Leon, and this is my portfolio website. Here you can explore my work, 
+                    view my network visualization projects, and learn more about my skills and experience.
+                </p>
+                <p class="content-text">
+                    Use the sidebar navigation to explore different sections of my portfolio, 
+                    including an interactive network topology map built with D3.js.
+                </p>
+            </div>
+
+            <!-- Network Map Section -->
+            <div id="network" class="content-section">
+                <h1 class="page-title">Network Topology Map</h1>
+                <p class="content-text">
+                    Interactive network visualization built with D3.js. This demonstrates my skills in 
+                    data visualization and frontend development.
+                </p>
+                <div class="netmap-container" id="netmap"></div>
+            </div>
+
+            <!-- About Section -->
+            <div id="about" class="content-section">
+                <h1 class="page-title">About Me</h1>
+                <p class="content-text">
+                    I'm a passionate developer with expertise in network security, data visualization, 
+                    and modern web technologies. I love creating interactive applications and solving 
+                    complex technical challenges.
+                </p>
+                <p class="content-text">
+                    My background includes work with network topology mapping, security analysis tools, 
+                    and full-stack web development. I'm always learning and exploring new technologies.
+                </p>
+            </div>
+
+            <!-- Contact Section -->
+            <div id="contact" class="content-section">
+                <h1 class="page-title">Get In Touch</h1>
+                <p class="content-text">
+                    I'm always interested in new opportunities and collaborations. Whether you have 
+                    a project in mind or just want to connect, feel free to reach out.
+                </p>
+                <p class="content-text">
+                    You can find me on GitHub, LinkedIn, or send me an email. I'd love to hear from you!
+                </p>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="content-section">
+                <h1 class="page-title">Settings</h1>
+                <p class="content-text">
+                    This section could contain user preferences, theme options, or other configuration 
+                    settings for the portfolio.
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            function showSection(sectionId) {
+                // Hide all sections
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Show selected section
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+
+                // Update active nav item
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                event.target.classList.add('active');
+            }
+
+            // Add click handlers to nav items
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                });
+            });
+
+            // Initialize network map when network section is shown
+            function initNetworkMap() {
+                if (document.getElementById('network').classList.contains('active')) {
+                    // This will be loaded when the network section is first accessed
+                    loadNetworkMap();
+                }
+            }
+
+            // Load network map script dynamically
+            function loadNetworkMap() {
+                if (window.networkMapLoaded) return; // Prevent double loading
+                
+                const script = document.createElement('script');
+                script.src = 'https://d3js.org/d3.v7.min.js';
+                script.onload = function() {
+                    // Now load the network map implementation
+                    const networkScript = document.createElement('script');
+                    networkScript.src = 'network-map.js';
+                    networkScript.onload = function() {
+                        window.networkMapLoaded = true;
+                        createNetworkMap();
+                    };
+                    document.head.appendChild(networkScript);
+                };
+                document.head.appendChild(script);
+            }
+
+            // Check if network section is active and load map
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        if (mutation.target.id === 'network' && mutation.target.classList.contains('active')) {
+                            loadNetworkMap();
+                        }
+                    }
+                });
+            });
+
+            observer.observe(document.getElementById('network'), {
+                attributes: true
+            });
+        });
+    </script>
 </body>
 </html>
