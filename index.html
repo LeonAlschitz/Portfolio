@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leons Portfolio</title>
+    <link rel="stylesheet" href="network-map.css">
+    <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -95,7 +98,9 @@
         .nav-item .icon.network { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9'/%3E%3C/svg%3E"); }
         .nav-item .icon.about { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'/%3E%3C/svg%3E"); }
         .nav-item .icon.contact { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z'/%3E%3C/svg%3E"); }
-        .nav-item .icon.settings { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'/%3E%3C/svg%3E"); }
+        .nav-item .icon.test { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'/%3E%3C/svg%3E"); }
+        .nav-item .icon.table { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z'/%3E%3C/svg%3E"); }
+        .nav-item .icon.settings { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z'/%3E%3C/svg%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'/%3E%3C/svg%3E"); }
 
         /* Main Content Area */
         .main-content {
@@ -127,16 +132,21 @@
             max-width: 800px;
         }
 
-        /* Network Map Container */
+        /* Network Map Container - Basic styles, detailed styling in network-map.css */
         .netmap-container {
             width: 100%;
             height: 600px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #fafbfc;
-            overflow: hidden;
             margin: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Test Graph Container */
+        .test-graph-container {
+            width: 100%;
+            height: 600px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fafafa;
         }
 
         /* Responsive Design */
@@ -180,6 +190,14 @@
                     <div class="icon contact"></div>
                     Contact
                 </button>
+                                 <button class="nav-item" data-section="test">
+                     <div class="icon test"></div>
+                     Test
+                 </button>
+                 <button class="nav-item" data-section="table">
+                     <div class="icon table"></div>
+                     Table
+                 </button>
             </nav>
             
             <nav class="nav-section bottom">
@@ -190,66 +208,10 @@
             </nav>
         </div>
 
-        <!-- Main Content Area -->
-        <main class="main-content">
-            <!-- Dashboard Section -->
-            <div id="dashboard" class="content-section active">
-                <h1 class="page-title">Welcome to My Portfolio</h1>
-                <p class="content-text">
-                    Hello! I'm Leon, and this is my portfolio website. Here you can explore my work, 
-                    view my network visualization projects, and learn more about my skills and experience.
-                </p>
-                <p class="content-text">
-                    Use the sidebar navigation to explore different sections of my portfolio, 
-                    including an interactive network topology map built with D3.js.
-                </p>
-            </div>
-
-            <!-- Network Map Section -->
-            <div id="network" class="content-section">
-                <h1 class="page-title">Network Topology Map</h1>
-                <p class="content-text">
-                    Interactive network visualization built with D3.js. This demonstrates my skills in 
-                    data visualization and frontend development.
-                </p>
-                <div class="netmap-container" id="netmap"></div>
-            </div>
-
-            <!-- About Section -->
-            <div id="about" class="content-section">
-                <h1 class="page-title">About Me</h1>
-                <p class="content-text">
-                    I'm a passionate developer with expertise in network security, data visualization, 
-                    and modern web technologies. I love creating interactive applications and solving 
-                    complex technical challenges.
-                </p>
-                <p class="content-text">
-                    My background includes work with network topology mapping, security analysis tools, 
-                    and full-stack web development. I'm always learning and exploring new technologies.
-                </p>
-            </div>
-
-            <!-- Contact Section -->
-            <div id="contact" class="content-section">
-                <h1 class="page-title">Get In Touch</h1>
-                <p class="content-text">
-                    I'm always interested in new opportunities and collaborations. Whether you have 
-                    a project in mind or just want to connect, feel free to reach out.
-                </p>
-                <p class="content-text">
-                    You can find me on GitHub, LinkedIn, or send me an email. I'd love to hear from you!
-                </p>
-            </div>
-
-            <!-- Settings Section -->
-            <div id="settings" class="content-section">
-                <h1 class="page-title">Settings</h1>
-                <p class="content-text">
-                    This section could contain user preferences, theme options, or other configuration 
-                    settings for the portfolio.
-                </p>
-            </div>
-        </main>
+                 <!-- Main Content Area -->
+         <main class="main-content">
+             <!-- Page content will be loaded here dynamically -->
+         </main>
     </div>
 
     <script>
@@ -258,74 +220,87 @@
             const navItems = document.querySelectorAll('.nav-item');
             const contentSections = document.querySelectorAll('.content-section');
 
-            function showSection(sectionId) {
-                // Hide all sections
-                contentSections.forEach(section => {
-                    section.classList.remove('active');
-                });
+                         async function showSection(sectionId, clickedElement) {
+                 try {
+                     // Load the page content
+                     const { loadPage } = await import('./page-loader.js');
+                     await loadPage(sectionId);
+                     
+                     // Update active nav item
+                     navItems.forEach(item => {
+                         item.classList.remove('active');
+                     });
+                     if (clickedElement) {
+                         clickedElement.classList.add('active');
+                     }
+                     
+                     // Load additional content based on section
+                     switch (sectionId) {
+                         case 'network':
+                             loadNetworkMap();
+                             break;
+                         case 'test':
+                             loadTestGraph();
+                             break;
+                         case 'table':
+                             loadTable();
+                             break;
+                     }
+                 } catch (error) {
+                     console.error('Error showing section:', error);
+                 }
+             }
 
-                // Show selected section
-                const targetSection = document.getElementById(sectionId);
-                if (targetSection) {
-                    targetSection.classList.add('active');
-                }
+                         // Add click handlers to nav items
+             navItems.forEach(item => {
+                 item.addEventListener('click', function() {
+                     const sectionId = this.getAttribute('data-section');
+                     showSection(sectionId, this);
+                 });
+             });
 
-                // Update active nav item
-                navItems.forEach(item => {
-                    item.classList.remove('active');
-                });
-                event.target.classList.add('active');
-            }
+             // Initialize dashboard by default
+             async function initializeDashboard() {
+                 try {
+                     const { loadPage } = await import('./page-loader.js');
+                     await loadPage('dashboard');
+                 } catch (error) {
+                     console.error('Error initializing dashboard:', error);
+                 }
+             }
 
-            // Add click handlers to nav items
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const sectionId = this.getAttribute('data-section');
-                    showSection(sectionId);
-                });
-            });
+             // Load dashboard when page loads
+             initializeDashboard();
 
-            // Initialize network map when network section is shown
-            function initNetworkMap() {
-                if (document.getElementById('network').classList.contains('active')) {
-                    // This will be loaded when the network section is first accessed
-                    loadNetworkMap();
-                }
-            }
+                         // Load network map script dynamically
+             async function loadNetworkMap() {
+                 try {
+                     const { loadNetworkMap: loadMap } = await import('./network-map.js');
+                     await loadMap();
+                 } catch (error) {
+                     console.error('Error loading network map:', error);
+                 }
+             }
 
-            // Load network map script dynamically
-            function loadNetworkMap() {
-                if (window.networkMapLoaded) return; // Prevent double loading
-                
-                const script = document.createElement('script');
-                script.src = 'https://d3js.org/d3.v7.min.js';
-                script.onload = function() {
-                    // Now load the network map implementation
-                    const networkScript = document.createElement('script');
-                    networkScript.src = 'network-map.js';
-                    networkScript.onload = function() {
-                        window.networkMapLoaded = true;
-                        createNetworkMap();
-                    };
-                    document.head.appendChild(networkScript);
-                };
-                document.head.appendChild(script);
-            }
+                          // Load test graph script dynamically
+              async function loadTestGraph() {
+                  try {
+                      const { loadTestGraph: loadGraph } = await import('./test-graph.js');
+                      await loadGraph();
+                  } catch (error) {
+                      console.error('Error loading test graph:', error);
+                  }
+              }
 
-            // Check if network section is active and load map
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        if (mutation.target.id === 'network' && mutation.target.classList.contains('active')) {
-                            loadNetworkMap();
-                        }
-                    }
-                });
-            });
-
-            observer.observe(document.getElementById('network'), {
-                attributes: true
-            });
+                            // Load table script dynamically
+               async function loadTable() {
+                   try {
+                       const { loadTable: loadTableFunc } = await import('./table.js');
+                       await loadTableFunc();
+                   } catch (error) {
+                       console.error('Error loading table:', error);
+                   }
+               }
         });
     </script>
 </body>

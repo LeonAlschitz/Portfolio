@@ -1,0 +1,18 @@
+Make a bottom element that lets users edit the data, and should always be accesible.
+
+The data should be simple, and the user should be able to easily add more data.
+Maybe add a button that will generate more data? x10 x100 x1000 entries
+have a running counter of the number of items
+
+
+make each page do something with the data.
+
+Netmap displays the data as a netmap
+
+Table displays the data as a table
+
+Implement the device sidebar
+
+Implement filters for the table
+
+Implement sorting for the table

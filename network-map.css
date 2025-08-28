@@ -1,0 +1,87 @@
+/* Network Map Styling */
+.netmap-container {
+    width: 100%;
+    height: 600px;
+    margin: 20px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+/* Node styling */
+.node-group {
+    cursor: pointer;
+}
+
+.node-circle {
+    stroke: #333;
+    stroke-width: 2;
+    transition: stroke-width 0.2s ease;
+}
+
+.node-icon {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+/* Node type colors */
+.node-circle[data-type="router"] { fill: #28a745; }
+.node-circle[data-type="switch"] { fill: #17a2b8; }
+.node-circle[data-type="firewall"] { fill: #dc3545; }
+.node-circle[data-type="loadbalancer"] { fill: #6f42c1; }
+.node-circle[data-type="server"] { fill: #fd7e14; }
+.node-circle[data-type="ids"] { fill: #e83e8c; }
+.node-circle[data-type="monitor"] { fill: #20c997; }
+.node-circle[data-type="backup"] { fill: #6f42c1; }
+.node-circle[data-type="pc"] { fill: #6c757d; }
+
+/* Links with type-based styling */
+.link {
+    cursor: pointer;
+    transition: stroke-width 0.2s ease, opacity 0.2s ease;
+}
+
+.link[stroke="#007acc"] { stroke: #007acc; } /* Core */
+.link[stroke="#28a745"] { stroke: #28a745; } /* Server */
+.link[stroke="#dc3545"] { stroke: #dc3545; } /* Security */
+.link[stroke="#6c757d"] { stroke: #6c757d; } /* Workstation */
+.link[stroke="#fd7e14"] { stroke: #fd7e14; } /* Management */
+.link[stroke="#6f42c1"] { stroke: #6f42c1; } /* Cross */
+
+/* Labels */
+.label-group {
+    pointer-events: none;
+}
+
+.label-background {
+    fill: rgba(255, 255, 255, 0.95);
+    stroke: #ddd;
+    stroke-width: 1;
+    rx: 4;
+    ry: 4;
+}
+
+.label-text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 10px;
+    fill: #333;
+    font-weight: 400;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 100%) {
+    .netmap-container {
+        height: 100%;
+    }
+    
+    .node-icon {
+        font-size: 10px;
+    }
+    
+    .label-text {
+        font-size: 9px;
+    }
+}
