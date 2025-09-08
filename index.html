@@ -285,8 +285,33 @@
                           // Load test graph script dynamically
               async function loadTestGraph() {
                   try {
-                      const { loadTestGraph: loadGraph } = await import('./test-graph.js');
-                      await loadGraph();
+                      // Load D3.js if not already loaded
+                      if (typeof d3 === 'undefined') {
+                          const script = document.createElement('script');
+                          script.src = 'https://d3js.org/d3.v7.min.js';
+                          
+                          await new Promise((resolve) => {
+                              script.onload = resolve;
+                              document.head.appendChild(script);
+                          });
+                      }
+                      
+                      const { createNetmap } = await import('./netmap-test.js?v=' + Date.now());
+                      
+                      // Clear any existing content
+                      const container = document.getElementById('test-graph');
+                      if (container) {
+                          container.innerHTML = '';
+                          
+                          // Create the netmap
+                          createNetmap(container, {
+                              selectedItem: null,
+                              showAllDevices: true,
+                              onNodeClick: (data) => {
+                                  console.log('Node clicked:', data);
+                              }
+                          });
+                      }
                   } catch (error) {
                       console.error('Error loading test graph:', error);
                   }
